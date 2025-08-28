@@ -1,0 +1,70 @@
+{
+    "name": "Orven Casido",
+    "role": "DevOps Apprentice",
+    "contact": {
+        "email": "orvencasidop@gmail.com",
+        "phone": "+63 927 339 1882",
+        "location": "Muntinlupa City, Philippines",
+        "linkedin": "linkedin.com/in/orven-casido-39bb58319/"
+    },
+    "education": [
+        {
+            "degree": "Bachelor of Science in Computer Engineering",
+            "school": "Southern Luzon State University",
+            "year": "2021 - 2025"
+        }
+    ],
+    "certifications": [
+        { "name": "DICT | Proficiency Exam (Programming)", "year": "2025" },
+        { "name": "Udemy | AWS Cloud Practitioner", "year": "2024" },
+        { "name": "Connectwise | Cybersecurity Fundamentals for Engineers", "year": "2024" }
+    ],
+    "skills": [
+        { "category": "DevOps Tools", "items": ["Kubernetes", "Docker", "Jenkins", "Helm", "Ansible", "Git", "CI/CD", "Linux", "Networking"] },
+        { "category": "Programming", "items": ["Python", "Bash", "Java", "JavaScript", "Groovy", "YAML", "JSON"] },
+        { "category": "Cloud Platforms", "items": ["AWS", "Azure"] }
+    ],
+    "profile": "I enjoy working with virtual machines in the cloud, where I can freely experiment and learn through trial and error. If something breaks, I can easily spin up a new instance or container, which allows me to explore without hesitation. I’m passionate about containerization for its isolation and self-healing capabilities, and I particularly enjoy working with Kubernetes. I also have a strong appreciation for Linux, as I believe understanding Linux provides the foundation to debug and manage almost anything. My passion for cloud technologies, Kubernetes, containers, and Linux continually drives me to learn, experiment, and build practical projects.",
+    "experience": [
+        {
+            "title": "DevOps Apprentice",
+            "company": "ESSPI | Essilor Luxottica",
+            "duration": "Jun 2025 - Present",
+            "bullets": [
+                "Being mentored in an enterprise-grade production DevOps environment",
+                "Taking courses in Kubernetes, Docker, and Jenkins",
+                "Working on hands-on projects to apply DevOps practices",
+                "Shadowing senior DevOps engineer to learn industry best practices",
+                "Handling ticketing systems through Jira"
+            ]
+        },
+        {
+            "title": "Internal IT Admin",
+            "company": "Carabao Cloud Solutions Inc.",
+            "duration": "Jun. 2024 - Sep. 2024",
+            "bullets": [
+                "Setting up, maintaining, and updating workstations",
+                "Managing inventory, including recording serial numbers of components",
+                "Courses completed in helpdesk support, remote monitoring management, cybersecurity, and business marketing",
+                "Certified in Cybersecurity and Remote Monitoring"
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "title": "Full DevOps Pipeline on Cloud VM",
+            "tech_stack": ["Git", "Jenkins", "Docker", "Kubernetes", "Virtual Machine"],
+            "description": "Created a full pipeline for my own resume website, hosted on a VM with a self-managed Jenkins server, where everything is automated from code push to deployment and fully containerized."
+        },
+        {
+            "title": "Virtual Reality Simulator with Realistic Scenarios and Interactive Feedback for Individual with Communication Challenges",
+            "tech_stack": ["Unity 3D", "Large Language Model", "API Integration: TTS/STT"],
+            "description": "Created a Virutal Application in Meta Quest 2 that simulates real-life scenarios for individuals with communication challenges, integrating LLM for dynamic interactions and TTS/STT for immersive experiences."
+        },
+        {
+            "title": "AWS Cloud Resume Challenge",
+            "tech_stack": ["AWS Services", "S3", "CloudFront", "NameCheap", "Lambda", "DynamoDB", "API Gateway"],
+            "description": "Built and deployed a personal resume website using various AWS services, including S3 for storage, CloudFront for CDN, Lambda for backend logic, and DynamoDB for data storage."
+        }
+    ]
+} 
