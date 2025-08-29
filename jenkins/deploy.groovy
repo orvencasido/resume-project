@@ -1,25 +1,3 @@
-properties([
-  parameters([
-    [$class: 'ChoiceParameter',
-      choiceType: 'PT_SINGLE_SELECT',   // dropdown
-      name: 'VERSION',
-      description: 'Select Docker image tag from DockerHub',
-      script: [$class: 'GroovyScript',
-        script: [
-          classpath: [],
-          sandbox: false,
-          script: """
-            // Fetch tags from DockerHub API
-            def process = "curl -s https://hub.docker.com/repository/docker/orvencasido/resume-project/tags | jq -r '.results[].name'".execute()
-            process.waitFor()
-            return process.in.text.readLines()
-          """
-        ]
-      ]
-    ]
-  ])
-])
-
 pipeline {
     agent { label 'docker-agent' }
 
