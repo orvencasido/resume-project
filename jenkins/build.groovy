@@ -1,12 +1,30 @@
 pipeline {
     agent { label 'docker-agent' }
 
+    parameters {
+        string(
+            name: 'GIT_COMMIT',
+            defaultValue: 'main',
+            description: 'Specify Git commit hash or branch (default: main)'
+        )
+    }
+
     environment {
         DOCKER_IMAGE = "orvencasido/resume-project"
-        VERSION = "1.${env.BUILD_NUMBER}"
+        VERSION = "${params.GIT_COMMIT.take(7)}"   // shorten commit hash for tag
     }
-    
+
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/orvencasido/resume-project.git'
+                script {
+                    // Checkout specific commit chosen in parameter
+                    sh "git checkout ${params.GIT_COMMIT}"
+                }
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
@@ -26,5 +44,4 @@ pipeline {
             }
         }
     }
-
 }
