@@ -33,9 +33,9 @@ pipeline {
 
                         # Just check if curl gets a response
                         if curl -s http://54.169.51.227:90 > /dev/null; then
-                          echo "✅ Container responded successfully!"
+                          echo "Success"
                         else
-                          echo "❌ Container did not respond!"
+                          echo "Failed"
                           docker logs test-${BUILD_NUMBER}
                           docker rm -f test-${BUILD_NUMBER} || true
                           exit 1
