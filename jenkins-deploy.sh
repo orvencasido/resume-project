@@ -18,6 +18,6 @@ docker run -d \
 -v $(which docker):/usr/bin/docker \
 -u root \
 -e JENKINS_AGENT_NAME=docker-agent \
--e JENKINS_URL=http://13.213.12.183:30000/ \
+-e JENKINS_URL=http://54.169.51.227:30000/ \
 -e JENKINS_SECRET=2afa3ac684d5083526870231f38aa34b32619be0cd07444ee0c19e35b9a5a9c0 \
 jenkins/inbound-agent
