@@ -30,12 +30,12 @@ pipeline {
                     echo "Testing image: ${DOCKER_IMAGE}:${params.VERSION}"
                     sh """
                         export TEST_CONTAINER=test-${BUILD_NUMBER}
-                        docker run -d --name \$TEST_CONTAINER -p 80:80 ${DOCKER_IMAGE}:${params.VERSION}
+                        docker run -d --name \$TEST_CONTAINER -p 90:90 ${DOCKER_IMAGE}:${params.VERSION}
 
                         sleep 5
 
                         # Grab the <title> from the HTML
-                        TITLE=\$(curl -s http://54.169.51.227:80 | grep -oP '(?<=<title>).*?(?=</title>)')
+                        TITLE=\$(curl -s http://54.169.51.227:90 | grep -oP '(?<=<title>).*?(?=</title>)')
 
                         if [ -z "\$TITLE" ]; then
                           echo "❌ No <title> found in response!"
