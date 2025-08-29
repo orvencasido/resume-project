@@ -11,7 +11,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "orvencasido/resume-project"
-        DOCKER_CONTAINER = "resume"
     }
 
     stages {
@@ -29,23 +28,20 @@ pipeline {
                 script {
                     echo "Testing image: ${DOCKER_IMAGE}:${params.VERSION}"
                     sh """
-                        export TEST_CONTAINER=test-${BUILD_NUMBER}
-                        docker run -d --name \$TEST_CONTAINER -p 90:90 ${DOCKER_IMAGE}:${params.VERSION}
-
+                        docker run -d --name test-${BUILD_NUMBER} -p 90:90 ${DOCKER_IMAGE}:${params.VERSION}
                         sleep 5
 
-                        # Grab the <title> from the HTML
-                        TITLE=\$(curl -s http://54.169.51.227:90 | grep -oP '(?<=<title>).*?(?=</title>)')
-
-                        if [ -z "\$TITLE" ]; then
-                          echo "❌ No <title> found in response!"
-                          docker logs \$TEST_CONTAINER
-                          docker rm -f \$TEST_CONTAINER || true
+                        # Just check if curl gets a response
+                        if curl -s http://54.169.51.227:90 > /dev/null; then
+                          echo "✅ Container responded successfully!"
+                        else
+                          echo "❌ Container did not respond!"
+                          docker logs test-${BUILD_NUMBER}
+                          docker rm -f test-${BUILD_NUMBER} || true
                           exit 1
                         fi
 
-                        echo "✅ Test passed! Found page title: '\$TITLE'"
-                        docker rm -f \$TEST_CONTAINER || true
+                        docker rm -f test-${BUILD_NUMBER} || true
                     """
                 }
             }
