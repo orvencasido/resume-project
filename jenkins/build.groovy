@@ -5,7 +5,7 @@ pipeline {
         string(
             name: 'VERSION',
             defaultValue: '',
-            description: 'Enter version number (leave blank to use 1.BUILD_NUMBER)'
+            description: 'Specify the version tag (default: 1.BUILD_NUMBER)'
         )
     }
 

@@ -5,7 +5,7 @@ pipeline {
         string(
             name: 'VERSION',
             defaultValue: 'latest',
-            description: 'Enter the version tag from DockerHub (example: latest, v1, v2)'
+            description: 'Enter the version tag from DockerHub'
         )
     }
 

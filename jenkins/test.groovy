@@ -5,7 +5,7 @@ pipeline {
         string(
             name: 'VERSION',
             defaultValue: 'latest',
-            description: 'Enter the version tag from DockerHub (example: latest, v1, v2)'
+            description: 'Enter the version tag from DockerHub'
         )
     }
 
@@ -31,7 +31,7 @@ pipeline {
                         docker run -d --name test-${BUILD_NUMBER} -p 90:80 ${DOCKER_IMAGE}:${params.VERSION}
                         sleep 5
 
-                        # Just check if curl gets a response
+                        # Check if curl gets a response
                         if curl -s http://54.169.51.227:90 > /dev/null; then
                           echo "Success"
                         else
