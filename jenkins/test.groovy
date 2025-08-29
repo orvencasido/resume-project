@@ -28,7 +28,7 @@ pipeline {
                 script {
                     echo "Testing image: ${DOCKER_IMAGE}:${params.VERSION}"
                     sh """
-                        docker run -d --name test-${BUILD_NUMBER} -p 90:90 ${DOCKER_IMAGE}:${params.VERSION}
+                        docker run -d --name test-${BUILD_NUMBER} -p 90:80 ${DOCKER_IMAGE}:${params.VERSION}
                         sleep 5
 
                         # Just check if curl gets a response
