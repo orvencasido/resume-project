@@ -30,6 +30,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    sh """
+                        docker rm -f ${DOCKER_CONTAINER} || true
+                        docker run -d --name ${DOCKER_CONTAINER} -p 80:80 ${DOCKER_IMAGE}:${params.VERSION}
+                    """
+                }
+            }
+        }
     }
 }
 
