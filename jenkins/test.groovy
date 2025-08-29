@@ -29,21 +29,23 @@ pipeline {
                 script {
                     echo "Testing image: ${DOCKER_IMAGE}:${params.VERSION}"
                     sh """
-                        TEST_CONTAINER=test-${DOCKER_IMAGE}:${params.VERSION}
-                        docker run -d --name $TEST_CONTAINER -p 80:80 ${DOCKER_IMAGE}:${params.VERSION}
+                        export TEST_CONTAINER=test-${BUILD_NUMBER}
+                        docker run -d --name \$TEST_CONTAINER -p 8080:80 ${DOCKER_IMAGE}:${params.VERSION}
 
                         sleep 5
 
-                        # Check if container responds on port 8080
-                        if ! curl -s -o /dev/null -w "%{http_code}" http://localhost:8080 | grep -q "200"; then
-                          echo "❌ Container failed health check"
-                          docker logs $TEST_CONTAINER
-                          docker rm -f $TEST_CONTAINER || true
+                        # Grab the <title> from the HTML
+                        TITLE=\$(curl -s http://localhost:8080 | grep -oP '(?<=<title>).*?(?=</title>)')
+
+                        if [ -z "\$TITLE" ]; then
+                          echo "❌ No <title> found in response!"
+                          docker logs \$TEST_CONTAINER
+                          docker rm -f \$TEST_CONTAINER || true
                           exit 1
                         fi
 
-                        echo "✅ Container passed health check"
-                        docker rm -f $TEST_CONTAINER || true
+                        echo "✅ Test passed! Found page title: '\$TITLE'"
+                        docker rm -f \$TEST_CONTAINER || true
                     """
                 }
             }
