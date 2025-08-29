@@ -2,10 +2,10 @@ pipeline {
     agent { label 'docker-agent' }
 
     parameters {
-        choice(
+        string(
             name: 'VERSION',
-            choices: getDockerTags(),
-            description: 'Select the version of the image from DockerHub'
+            defaultValue: 'latest',
+            description: 'Enter the version tag from DockerHub (example: latest, v1, v2)'
         )
     }
 
@@ -37,4 +37,3 @@ pipeline {
         }
     }
 }
-
