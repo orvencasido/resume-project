@@ -1,32 +1,25 @@
-def getDockerTags() {
-    def tags = sh(
-        script: "curl -s https://hub.docker.com/repository/docker/orvencasido/resume-project/tags | jq -r '.results[].name'",
-        returnStdout: true
-    ).trim().split('\n')
-    return tags
-}
-
 pipeline {
     agent { label 'docker-agent' }
 
     parameters {
-        choice(
+        string(
             name: 'VERSION',
-            choices: getDockerTags(),
-            description: 'Select the version of the image'
+            defaultValue: 'latest',
+            description: 'Enter the version tag from DockerHub (example: latest, v1, v2)'
         )
     }
 
     environment {
         DOCKER_IMAGE = "orvencasido/resume-project"
+        DOCKER_CONTAINER = "resume"
     }
 
     stages {
-        stage('Build') {
+        stage('Pull') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${params.VERSION} ."
-                    sh "docker push ${DOCKER_IMAGE}:${params.VERSION}"
+                    echo "Pulling image: ${DOCKER_IMAGE}:${params.VERSION}"
+                    sh "docker pull ${DOCKER_IMAGE}:${params.VERSION}"
                 }
             }
         }
@@ -34,6 +27,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    echo "Deploying container: ${DOCKER_CONTAINER} with image ${DOCKER_IMAGE}:${params.VERSION}"
                     sh """
                         docker rm -f ${DOCKER_CONTAINER} || true
                         docker run -d --name ${DOCKER_CONTAINER} -p 80:80 ${DOCKER_IMAGE}:${params.VERSION}
@@ -43,4 +37,3 @@ pipeline {
         }
     }
 }
-
