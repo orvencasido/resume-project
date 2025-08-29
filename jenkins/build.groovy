@@ -1,9 +1,17 @@
 pipeline {
     agent { label 'docker-agent' }
 
+    parameters {
+        string(
+            name: 'VERSION',
+            defaultValue: '',
+            description: 'Enter version number (leave blank to use 1.BUILD_NUMBER)'
+        )
+    }
+
     environment {
         DOCKER_IMAGE = "orvencasido/resume-project"
-        VERSION = "1.${env.BUILD_NUMBER}"
+        VERSION = "${params.VERSION ?: "1.${env.BUILD_NUMBER}"}"
     }
     
     stages {
@@ -26,5 +34,4 @@ pipeline {
             }
         }
     }
-
 }
